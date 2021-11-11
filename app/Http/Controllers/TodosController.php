@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Board;
 use Illuminate\Support\Facades\Auth;
 
 class TodosController extends Controller
@@ -15,8 +15,9 @@ class TodosController extends Controller
     {
         # code...
 
-        $todos = Todo::all();
-        return view('todos.index')->with(['todos' => $todos]);
+        $boards = Board::where('user_id', Auth::user()->id)->get();
+        $tasks = Board::getTasksBoards($boards);
+        return view('todos.index')->with(['boards' => $boards, 'tasks' => $tasks]);
     }
 
     public function byUserId(Request $request)
