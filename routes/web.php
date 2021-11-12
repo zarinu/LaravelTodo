@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{UserController,TodosController,HomeController};
+use App\Http\Controllers\{UserController,BoardsController,HomeController};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,14 +25,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/todos/mine', [TodosController::class, 'byUserId'])->middleware(['auth'])->name('mine');
-Route::get('/todos/{id}/edit', [TodosController::class, 'edit'])->middleware(['auth'])->name('edit-form');
-Route::get('/todos/create', [TodosController::class, 'create'])->middleware(['auth'])->name('create-form');
-Route::post('/todos/{id}/update', [TodosController::class, 'update'])->middleware(['auth'])->name('update');
-Route::post('/todos/add', [TodosController::class, 'store'])->middleware(['auth'])->name('add');
-Route::get('/todos/{id}', [TodosController::class, 'show'])->middleware(['auth'])->name('show');
-Route::get('/todos/{id}/delete', [TodosController::class, 'delete'])->middleware(['auth'])->name('delete');
-Route::get('/todo', [TodosController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/todos/mine', [BoardsController::class, 'byUserId'])->middleware(['auth'])->name('mine');
+Route::get('/todos/{id}/edit', [BoardsController::class, 'edit'])->middleware(['auth'])->name('edit-form');
+Route::get('/boards/create', [BoardsController::class, 'create'])->middleware(['auth'])->name('create-form');
+Route::post('/todos/{id}/update', [BoardsController::class, 'update'])->middleware(['auth'])->name('update');
+Route::post('/todos/add', [BoardsController::class, 'store'])->middleware(['auth'])->name('add');
+Route::get('/todos/{id}', [BoardsController::class, 'show'])->middleware(['auth'])->name('show');
+Route::get('/todos/{id}/delete', [BoardsController::class, 'delete'])->middleware(['auth'])->name('delete');
+Route::get('/todo', [BoardsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 
 Route::resource('users', UserController::class);

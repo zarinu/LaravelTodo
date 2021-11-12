@@ -35,9 +35,11 @@ use Illuminate\Support\Facades\Auth; ?>
             <div id="logo">
                 <img id="logoimg" src="{{asset('img/logo/logoLight.png')}}" alt="logo picture" title="logo picture">
             </div>
-            <div class="faicon" id="addbord" onclick="addboard">
-                <span title="add a board" class="fas fa-plus fa-lg" style="font-size: 20px; line-height: 43px;"></span>
-            </div>
+            <a href="{{ route('create-form') }}">
+                <div class="faicon" id="addbord" onclick="addboard()">
+                    <span title="add a board" class="fas fa-plus fa-lg" style="font-size: 20px; line-height: 43px;"></span>
+                </div>
+            </a>
         </div>
 
 
