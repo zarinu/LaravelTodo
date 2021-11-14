@@ -15,33 +15,8 @@
 //         }
 //     });
 // }
-function logout() {
-$.ajax({
-  type: "POST",
-  url: window.location.href,
-  data: {
-    logout: 'yes'
-  },
-  success: function () {
-    location.reload();
-  }
-});
 
-}
-function deleteAccount() {
-alert("your account and all of your data and task will be deleted!");
-$.ajax({
-  type: "POST",
-  url: window.location.href,
-  data: {
-    deleteUser: 'yes'
-  },
-  success: function () {
-    location.reload();
-  }
-});
 
-}
 // //about collaborate modal
 // var collabmodal = document.getElementById("modalco");
 // var collabBtns = document.getElementsByClassName("btnOpenCollabModal");
@@ -68,28 +43,14 @@ $.ajax({
 // }
 
 function modalAccountOption() {
-var accountmodal = document.getElementById("accountModal");
+  var accountmodal = document.getElementById("accountModal");
 
-accountmodal.style.display = "block";
+  accountmodal.style.display = "block";
 
-window.onclick = function (event) {
-  if (event.target == accountmodal) {
-    accountmodal.style.display = "none";
-  }
-}
-
-}
-
-function addboard() {
-  $.ajax({
-    type: "POST",
-    url: window.location.href,
-    data: {
-      // addboard:
-    },
-    success: function () {
-      location.reload();
+  window.onclick = function (event) {
+    if (event.target == accountmodal) {
+      accountmodal.style.display = "none";
     }
-  });
-}
+  }
 
+}

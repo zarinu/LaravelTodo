@@ -164,14 +164,7 @@
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
-/* ////////////////////////////////// content section /////////////////////////////////// */
+/* ////////////////////////////////// content index page /////////////////////////////////// */
 .conteinerContent {
   width: 1150px;
   height: 250px;
@@ -181,8 +174,6 @@
 }
 
 .board{
-  overflow: hidden;
-  position: relative;
   float: left;
   width: 25%;
   height: 100%;
@@ -191,6 +182,8 @@
   box-shadow: 2px 2px 10px rgb(196, 196, 196);
   margin: 15px;
 }
+
+/* //////////////board texts////////////////// */
 .boardText {
   margin: 0px;
 }
@@ -215,8 +208,12 @@
   padding: 0px;
 }
 
+
+/* ////////////////////baoard header/////////////////// */
 .boardHeader {
   background-color: rgb(230, 230, 230);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   height: 40px;
   margin: 0px;
   padding: 6px 15px 1px 20px;
@@ -235,7 +232,13 @@
   float: right;
   margin-top: 5px;
 }
+.boardOptionBtn {
+  width: 13px;
+  padding: 3px;
+  cursor: pointer;
+}
 
+/* ////////////////////////////////////////////////////////////////////////////// */
 /* #logOut { 
   width: 30px;
   font-size: 10px;
@@ -385,6 +388,7 @@ ul li.checked::before {
   border: 1px solid #888;
   height: auto;
   width: 40%;
+  padding: 7px;
 }
 
 /*
@@ -410,3 +414,117 @@ ul li.checked::before {
   cursor: pointer;
 } */
 
+
+
+
+
+/* //////////////////////////// section add a board ///////////////////////////////// */
+.formAddBoard{
+  margin: 4px;
+}
+
+.formAddBoard *{
+  padding: 0px;
+  margin: 4px;
+  width: 300px;
+  text-align: center;
+}
+
+/* //////////////////////////////// board show ////////////////////////// */
+#myBtn {
+  cursor: pointer;
+}
+
+#one-board{
+  margin: 50px 470px;
+
+}
+
+.task{
+  display: grid;
+  grid-template-columns: 20px 240px 20px;
+  grid-gap: 10px;
+  height: 50px;
+  padding: 5px 15px 5px 15px;
+}
+
+.task:nth-child(even){
+  background-color: rgb(245, 245, 245);
+}
+
+.task .checkbox {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.task .checkbox input{
+  margin: 12px 0px 0px 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.task .taskText{
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.task .taskText input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(59, 59, 59);
+  opacity: 1; /* Firefox */
+}
+.task .taskText input:focus{
+  outline: none;
+}
+
+.task .taskText input{
+  margin-top: 6px;
+  border: none;
+  width: 240px;
+  background-color: inherit;
+}
+
+.task .removeTask{
+  width: 20px;
+  height: 20px;
+  margin: 7px 0px 0px 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+
+/* ///////////// footer board ////////////// */
+.addTask {
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  display: inline;
+  float: right;
+  margin: 10px 10px;
+}
+.boardFooter {
+  height: 50px;
+  background-color: rgb(230, 230, 230);
+  box-shadow: 1px 1px 10px #a09595 inset;
+  
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.whoAdded {
+  float: left;
+  display: inline;
+  margin: 5px 5px;
+  width: 257px;
+}
+
+.whoAdded p{
+  margin: 7px 9px;
+  text-align: center;
+}

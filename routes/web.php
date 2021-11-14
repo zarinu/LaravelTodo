@@ -25,13 +25,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/todos/mine', [BoardsController::class, 'byUserId'])->middleware(['auth'])->name('mine');
-Route::get('/todos/{id}/edit', [BoardsController::class, 'edit'])->middleware(['auth'])->name('edit-form');
-Route::get('/boards/create', [BoardsController::class, 'create'])->middleware(['auth'])->name('create-form');
+Route::get('/boards/{id}/edit', [BoardsController::class, 'edit'])->middleware(['auth'])->name('edit-board');
 Route::post('/todos/{id}/update', [BoardsController::class, 'update'])->middleware(['auth'])->name('update');
-Route::post('/todos/add', [BoardsController::class, 'store'])->middleware(['auth'])->name('add');
-Route::get('/todos/{id}', [BoardsController::class, 'show'])->middleware(['auth'])->name('show');
-Route::get('/todos/{id}/delete', [BoardsController::class, 'delete'])->middleware(['auth'])->name('delete');
+Route::get('/boards/create', [BoardsController::class, 'create'])->middleware(['auth'])->name('create-board');
+Route::post('/boards/add', [BoardsController::class, 'store'])->middleware(['auth'])->name('add');
+Route::get('/boards/{id}', [BoardsController::class, 'show'])->middleware(['auth'])->name('show');
+Route::post('/boards/{id}', [BoardsController::class, 'showp'])->middleware(['auth'])->name('showp');
+Route::get('/boards/{id}/delete', [BoardsController::class, 'delete'])->middleware(['auth'])->name('delete');
 Route::get('/todo', [BoardsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 

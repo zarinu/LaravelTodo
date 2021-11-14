@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\{User, Board};
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -101,6 +101,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $boards = Board::where('user_id' , $user->id)->get();
+        Board::deleteAll($boards);
+        
         $user->delete();
 
         return redirect()->route('users.index')

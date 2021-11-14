@@ -1,68 +1,77 @@
 @extends('layouts.crud')
 
 @section('content')
-<div>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<div class="board" id="one-board">
+  <div class="boardHeader">
+    <th><strong>{{ $board->subject }}</strong></th>
+    <th><i id="myBtn" class="fas fa-ellipsis-v"></i></th>
+  </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
-        </div>
+
+  <div class="boardContent">
+    @foreach($tasks as $task)
+    <div class="task">
+      <form class="checkbox">
+        <input type="checkbox" name="" {{ $task->done == 1 ? 'checked' : '' }} />
+      </form>
+
+      <form class="taskText">
+        <input type="text" name="" placeholder="{{$task->text}}" class="">
+      </form>
+
+      <form class="removeTask">
+        <i class="fas fa-trash-alt"></i>
+      </form>
+    </div>
+    @endforeach
+    <div class="boardFooter">
+      <div class="whoAdded">
+        <p>Added by {{$board->user_id == auth()->user()->id ? 'You' : $board->user->name}}</p>
+      </div>
+      <div class="addTask faicon">
+        <span title="add a text" class="fas fa-plus fa-lg" style="font-size: 15px; line-height: 29px;"></span>
+      </div>
     </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="panel-bod">
-                        <table class="table">
-
-                            <!-- Table Headings -->
-                            <thead>
-                                <th>Todo</th>
-                                <th>&nbsp;</th>
-                            </thead>
-
-                            <!-- Table Body -->
-                            <tbody class="max-w-full">
-                                <tr class="max-w-full">
-                                    <!-- Task Name -->
-                                    <td class="pt-5 pb-5 pr-5">
-                                        <!-- <div class=""> -->
-                                        <h1 class="sm:font-bold">{{ $todo->title }}</h1>
-                                        <p>{{ $todo->desc }}</p>
-                                        <div class="flex content-between">
-                                            <p class="pt-2 text-gray-500 pr-5"> Added By: {{ $todo->user->name }}</p>
-                                            <p class="pt-2 text-gray-500"> Status: {{ $todo->status == 1? "Done": "Pending"}}</p>
-                                        </div>
-
-                                    </td>
-
-                                    <td>
-                                        <!-- TODO: Delete Button -->
-                                        <div>
-                                            <a class="btn-primary" href="/todos/{{$todo->id}}">View</a>
-                                            @if($todo->user_id == auth()->user()->id)
-                                            <a class="btn-primary" href="{{ route('edit-form', ['id'=>$todo->id]) }}">Edit</a>
-                                            <a class="btn-primary" href="/todos/{{$todo->id}}/delete">Delete</a>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
+
+<!-- The Modal of account options -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <a href="{{ route('delete', ['id'=>$board->id]) }}">delete board</a><br>
+    <a href="{{ route('edit-board', ['id'=>$board->id]) }}">rename subject board</a>
+  </div>
+
+</div>
+
+
+<script>
+  // Get the modal
+  var modali = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btni = document.getElementById("myBtn");
+
+  // When the user clicks the button, open the modal 
+  btni.onclick = function() {
+    modali.style.display = "block";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modali) {
+      modali.style.display = "none";
+    }
+  }
+</script>
 @endsection
+<!-- 
+<form method="post" action="{{ route('showp', ['id'=>$board->id]) }}">
+          @csrf
+          <!-- {{ csrf_field() }} -->
+<!-- <input name="textt" type="text">
+    <input type="submit">
+    </form> -->

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Board;
+use App\Models\{Board, Task};
 use Illuminate\Support\Facades\Auth;
 
-class BoardsController extends Controller
+class boardsController extends Controller
 {
     //
 
@@ -16,43 +16,58 @@ class BoardsController extends Controller
         # code...
 
         $boards = Board::where('user_id', Auth::user()->id)->get();
-        $tasks = Board::getTasksBoards($boards);
+        $tasks = Board::getTasksboards($boards);
         return view('boards.index')->with(['boards' => $boards, 'tasks' => $tasks]);
     }
 
     public function byUserId(Request $request)
     {
         # code...
-        
-        $Boards = Board::where('user_id', Auth::user()->id)->get();
-        return view('Boards.index')->with(['Boards' => $Boards]);
+
+        $boards = Board::where('user_id', Auth::user()->id)->get();
+        return view('boards.index')->with(['boards' => $boards]);
     }
 
+    public function showp(Request $request, $id)
+    {
+        # code...
+        return redirect('/home');
+        $task = new Task;
+        $task->text = $request->textt;
+        $task->board_id = $id;
+
+        if ($task->save()) {
+            $board = Board::find($id);
+            $tasks = Task::where('board_id', $id)->get();
+            return view('boards.show')->with(['board' => $board, 'tasks' => $tasks]);
+        }
+
+        return; // 422
+    }
     public function show(Request $request, $id)
     {
         # code...
-        $Board = Board::find($id);
-        return view('Boards.show')->with(['Board' => $Board]);
+        $board = Board::find($id);
+        $tasks = Task::where('board_id', $id)->get();
+        return view('boards.show')->with(['board' => $board, 'tasks' => $tasks]);
     }
 
     public function edit(Request $request, $id)
     {
         # code...
-        $Board = Board::find($id);
-        return view('Boards.edit', ['Board' => $Board]);
+        $board = Board::find($id);
+        return view('boards.edit', ['board' => $board]);
     }
 
     public function update(Request $request, $id)
     {
         # Validations before updating
-        $Board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        $board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
 
-        if ($Board) {
-            $Board->title = $request->title;
-            $Board->desc = $request->desc;
-            $Board->status = $request->status == 'on' ? 1 : 0;
-            if ($Board->save()) {
-                return view('Boards.show', ['Board' => $Board]);
+        if ($board) {
+            $board->subject = $request->subject;
+            if ($board->save()) {
+                return redirect('/boards/'.$id);
             }
             return; // 422
         }
@@ -69,12 +84,11 @@ class BoardsController extends Controller
     public function store(Request $request)
     {
         # Validations before updating
-        $Board = new Board;
-        $Board->title = $request->title;
-        $Board->desc = $request->desc;
-        $Board->user_id = Auth::user()->id;
-        if ($Board->save()) {
-            return view('Boards.show', ['Board' => $Board]);
+        $board = new Board;
+        $board->subject = $request->subject;
+        $board->user_id = Auth::user()->id;
+        if ($board->save()) {
+            return redirect('/boards/'.$board->id);
         }
 
         return; // 422
@@ -83,12 +97,11 @@ class BoardsController extends Controller
     public function delete(Request $request, $id)
     {
         # code...
-        $Board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
-        if ($Board) {
-            $Board->delete();
-            return view('Boards.index');
+        $board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        if ($board) {
+            $board->deleteWithTasks();
+            return redirect('/todo');
         }
         return; // 404
     }
 }
-

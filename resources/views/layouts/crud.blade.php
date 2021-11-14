@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth; ?>
             <div id="logo">
                 <img id="logoimg" src="{{asset('img/logo/logoLight.png')}}" alt="logo picture" title="logo picture">
             </div>
-            <a href="{{ route('create-form') }}">
+            <a href="{{ route('create-board') }}">
                 <div class="faicon" id="addbord" onclick="addboard()">
                     <span title="add a board" class="fas fa-plus fa-lg" style="font-size: 20px; line-height: 43px;"></span>
                 </div>
@@ -59,11 +59,17 @@ use Illuminate\Support\Facades\Auth; ?>
             <hr class="hr">
             <p><span>&#xf044 </span>Edit Account Info</p>
             <p id="deleteAccount" onclick="deleteAccount()"><span>&#xf1f8 </span>Delete Account</p>
-            <p id="logOut" onclick="logout()"><span>&#xf08b </span>Logout</p>
+            <p id="logOut" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><span>&#xf08b </span>
+                <a href="{{ route('logout') }}">Logout</a></p>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
         </div>
 
     </div>
 
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
 
     @yield('content')
 
