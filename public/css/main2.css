@@ -124,6 +124,12 @@
   float: right;
   margin-right: 30px;
 }
+#search:hover + #searchok{
+  color: black;
+}
+#searchclose:hover + #search{
+  background-color: rgb(250, 250, 250);
+}
 /* /////////right side of header include logo and add board /////////////*/
 #rightH {
   width: 14%;
@@ -212,6 +218,12 @@
   padding: 0px;
 }
 
+.rowBoardText, .boardHeader {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 /* ////////////////////baoard header/////////////////// */
 .boardHeader {
@@ -241,136 +253,9 @@
   padding: 3px;
   cursor: pointer;
 }
-
-/* ////////////////////////////////////////////////////////////////////////////// */
-/* #logOut { 
-  width: 30px;
-  font-size: 10px;
-  padding: 0%;
-}
-
-
-
-
-/* Remove margins and padding from the list
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Style the list items 
-ul li {
+.boardsOptionBtn {
   cursor: pointer;
-  position: relative;
-  padding: 20px;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-
-  /* make the list items unselectable 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
-
-/* Set all odd list items to a different color (zebra-stripes) 
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
-
-/* Darker background-color on hover 
-ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text 
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on 
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-/* Style the close button 
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
-
-.close:hover {
-  background-color: skyblue;
-  color: white;
-}
-
-
-/* Style the input 
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  width: 75%;
-  padding: 10px;
-  float: left;
-  font-size: 16px;
-}
-
-/* Style the "Add" button 
-.addBtn {
-  padding: 10px;
-  width: 25%;
-  background: #faf7f7;
-  color: #dfdbdb;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 0;
-}
-
-#myInput:hover + .addBtn{
-    color: black;
-}
-
-.addBtn:hover {
-  background-color: #bbb;
-  color: black;
-}
-
-.checkbox {
-  display: inline;
-  width: 15px;
-  margin-top: 10px;
-}
-
-.btnDelete {
-  display: inline;
-  width: auto;
-  margin: 2px;
-}
-
-.btnOpenCollabModal {
-  display: inline;
-  width: auto;
-  margin: 2px;
-}
-*/
-
 
 /* modal css  */
 .modal {
@@ -394,33 +279,6 @@ ul li.checked::before {
   width: 40%;
   padding: 7px;
 }
-
-/*
-#collabInput {
-  float: left;
-  width: 80%;
-  height: 40px;
-}
-
-#closeSubmitmodal {
-  color: #aaa;
-  float: right;
-  font-size: 15px;
-  width: 20%;
-  font-weight: bold;
-  height: 40px;
-}
-
-#closeSubmitmodal:hover,
-#closeSubmitmodal:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-} */
-
-
-
-
 
 /* //////////////////////////// section add a board ///////////////////////////////// */
 .formAddBoard{
@@ -480,6 +338,10 @@ ul li.checked::before {
   padding: 0px;
 }
 
+input.checked {
+  text-decoration: line-through;
+}
+
 .task .taskText input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(59, 59, 59);
   opacity: 1; /* Firefox */
@@ -499,7 +361,7 @@ ul li.checked::before {
   width: 5px;
   height: 5px;
   cursor: pointer;
-  font-size: 10Fpx;
+  font-size: 10px;
 }
 .task .removeTask{
   width: 20px;

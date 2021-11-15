@@ -42,11 +42,6 @@ use Illuminate\Support\Facades\Auth; ?>
             </a>
         </div>
 
-
-        <!-- <form action="index.php" method="POST">
-        <input name="mainText" type="text" id="myInput" placeholder="what do you want to do? . . .">
-        <input type="submit" onclick="window.location.href=window.location.href" class="addBtn" value="add">
-    </form> -->
     </header>
     <hr class="hr">
 

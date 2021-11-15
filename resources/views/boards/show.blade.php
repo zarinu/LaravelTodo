@@ -15,13 +15,13 @@
       <form class="checkbox" id="checkTask{{$task->id}}" method="POST" action="{{ route('doneTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
         @csrf
         @method('PATCH')
-        <input type="checkbox" name="done" onclick="submitF('checkTask','{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}} />
+        <input type="checkbox" name="done" onclick="submitF('checkTask','{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}}/>
       </form>
 
       <form id="renameTask{{$task->id}}" class="taskText" method="POST" action="{{ route('renameTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
         @csrf
         @method('PUT')
-        <input type="text" name="task" placeholder="{{$task->text}}">
+        <input type="text" name="task" placeholder="{{$task->text}}" class="{{$task->done == 1 ? 'checked' : ''}}">
         <p class="submitEditTask" onclick="submitF('renameTask','{{$task->id}}')">&#xf06e</p>
       </form>
 
@@ -51,7 +51,8 @@
   <!-- Modal content -->
   <div class="modal-content">
     <a href="{{ route('delete', ['id'=>$board->id]) }}">delete board</a><br>
-    <a href="{{ route('edit-board', ['id'=>$board->id]) }}">rename subject board</a>
+    <a href="{{ route('edit-board', ['id'=>$board->id]) }}">rename subject board</a><br>
+    <a href="{{ route('collab-board', ['id'=>$board->id]) }}">collab this board</a>
   </div>
 
 </div>

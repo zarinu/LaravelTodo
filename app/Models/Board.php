@@ -10,6 +10,10 @@ class Board extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'collab_id' => 'array'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

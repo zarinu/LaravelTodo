@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\{Board, Task};
+use App\Models\{Board, Task, User};
 use Illuminate\Support\Facades\Auth;
 
 class boardsController extends Controller
@@ -43,7 +43,7 @@ class boardsController extends Controller
         if ($board) {
             $board->subject = $request->subject;
             if ($board->save()) {
-                return redirect('/boards/'.$id);
+                return redirect('/boards/' . $id);
             }
             return; // 422
         }
@@ -64,9 +64,43 @@ class boardsController extends Controller
         $board->subject = $request->subject;
         $board->user_id = Auth::user()->id;
         if ($board->save()) {
-            return redirect('/boards/'.$board->id);
+            return redirect('/boards/' . $board->id);
         }
 
+        return; // 422
+    }
+
+    public function collabGet($id)
+    {
+        return view('boards.collab', ['boardId' => $id]);
+    }
+
+    public function collab(Request $request, $id)
+    {
+        $collabId = $request->collab_id;
+        $user = User::find($collabId);
+        if (empty($user)) {
+            echo "گشتیم نبود نگرد نیست";
+            return;
+        }
+
+        $board = Board::find($id);
+
+        $preValue = $board->collab_id;
+        if (empty($preValue)) {
+            $preValue = [];
+        }
+        $lala = array_search(intval($collabId), $preValue, TRUE);
+        if ($lala !== False) {
+            echo "qablan collab shede";
+            return;
+        }
+        array_push($preValue,  intval($collabId));
+        $board->collab_id = $preValue;
+
+        if ($board->save()) {
+            return redirect('/boards/' . $id);
+        }
         return; // 422
     }
 

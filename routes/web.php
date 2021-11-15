@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{UserController,BoardsController,HomeController, TaskController};
+use App\Models\Board;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,8 @@ Route::get('/boards/create', [BoardsController::class, 'create'])->middleware(['
 Route::post('/boards/add', [BoardsController::class, 'store'])->middleware(['auth'])->name('add');
 Route::get('/boards/{id}', [BoardsController::class, 'show'])->middleware(['auth'])->name('show');
 Route::get('/boards/{id}/delete', [BoardsController::class, 'delete'])->middleware(['auth'])->name('delete');
+Route::get('/boards/{id}/collab', [BoardsController::class, 'collabGet'])->middleware(['auth'])->name('collab-board');
+Route::post('/boards/{id}/collab', [BoardsController::class, 'collab'])->middleware(['auth'])->name('collab');
 Route::get('/todo', [BoardsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 
