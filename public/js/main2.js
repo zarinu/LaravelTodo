@@ -1,18 +1,19 @@
 // function toChangeTick(id) {
-//     var status = 'todo';
-//     if ($("#task_" + id).prop('checked') == true) {
-//         status = 'done';
-//     }
+//   // alert("lala");
+//   var status = 'todo';
+//   if ($("#done" + id).prop('checked') == true) {
+//     status = 'done';
+//   }
+//   alert("<?php echo 'jon'; ?>");
 //     $.ajax({
-//         type: "POST",
-//         url: window.location.href,
-//         data: {
-//             status: status,
-//             task_id: id
-//         }, // serializes the form's elements.
-//         success: function (data) {
-//             location.reload();
-//         }
+//       type: "PUT",
+//       url: "{{route('showEditTask', id)}}",
+//       data: {
+//         status: status
+//       }, // serializes the form's elements.
+//       success: function (data) {
+//         location.reload();
+//       }
 //     });
 // }
 
@@ -54,3 +55,4 @@ function modalAccountOption() {
   }
 
 }
+

@@ -55,21 +55,27 @@ use Illuminate\Support\Facades\Auth; ?>
 
         <!-- Modal content -->
         <div class="modal-content" id="madalAcouContent">
-            <p style="pointer-events: none;">welcome <strong><?php echo Auth::user()->username ?></strong></p>
+            <p style="pointer-events: none;">welcome <strong>{{ Auth::user()->username }}</strong></p>
             <hr class="hr">
-            <p><span>&#xf044 </span>Edit Account Info</p>
-            <p id="deleteAccount" onclick="deleteAccount()"><span>&#xf1f8 </span>Delete Account</p>
+
+
+            <p><span>&#xf044 </span><a href="{{ route('users.edit', Auth::user()->id) }}">Edit Account Info</a></p>
+
+            <form id="deleteAcount" action="{{ route('users.destroy', Auth::user()->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <p id="deleteAccount" onclick="myFunction() ;{
+                    document.getElementById('deleteAcount').submit(); }"><span>&#xf1f8 </span><a>Delete Account</a></p>
+            </form>
+
             <p id="logOut" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"><span>&#xf08b </span>
-                <a href="{{ route('logout') }}">Logout</a></p>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                <a href="{{ route('logout') }}">Logout</a>
+            </p>
+
         </div>
 
     </div>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
 
     @yield('content')
 

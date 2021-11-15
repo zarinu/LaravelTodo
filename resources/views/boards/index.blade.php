@@ -7,7 +7,7 @@
     <div class="board">
         <div class="boardHeader">
             <p> {{$board->subject}} </p>
-            <i id="btn{{$board->id}}" class="fas fa-ellipsis-v boardOptionBtn"></i>
+            <i id="btn{{$board->id}}" class="fas fa-ellipsis-v boardsOptionBtn"></i>
         </div>
         <div class="boardText">
             @foreach($tasks[$key] as $task)
@@ -24,7 +24,7 @@
 
 <!-- The Modal of account options -->
 @foreach($boards as $board)
-<div id="modal{{$board->id}}" class="modal boardOptionModal">
+<div id="modal{{$board->id}}" class="modal boardsOptionModal">
 
     <!-- Modal content -->
 
@@ -38,20 +38,20 @@
 </div>
 @endforeach
 <script>
-    var boardOptionBtn = document.getElementsByClassName("boardOptionBtn");
-    var boardOptionModal = document.getElementsByClassName("boardOptionModal");
+    var boardsOptionBtn = document.getElementsByClassName("boardsOptionBtn");
+    var boardsOptionModal = document.getElementsByClassName("boardsOptionModal");
 
 
-    for (let i = 0; i < boardOptionBtn.length; i++) {
-        boardOptionBtn[i].onclick = function() {
-            boardOptionModal[i].style.display = "block";
+    for (let i = 0; i < boardsOptionBtn.length; i++) {
+        boardsOptionBtn[i].onclick = function() {
+            boardsOptionModal[i].style.display = "block";
         }
     }
 
     window.onclick = function(event) {
-        for (let i = 0; i < boardOptionModal.length; i++) {
-            if (event.target == boardOptionModal[i]) {
-                boardOptionModal[i].style.display = "none";
+        for (let i = 0; i < boardsOptionModal.length; i++) {
+            if (event.target == boardsOptionModal[i]) {
+                boardsOptionModal[i].style.display = "none";
             }
         }
     }

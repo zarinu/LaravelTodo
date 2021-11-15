@@ -159,6 +159,9 @@
   padding: 7px 15px;
   font-family: Verdana;
 }
+#madalAcouContent p *{
+  color: rgb(41, 41, 41);
+}
 #madalAcouContent p:hover {
   background-color: #d4d4d4;
   cursor: pointer;
@@ -430,6 +433,10 @@ ul li.checked::before {
   text-align: center;
 }
 
+#addTaskModalContent {
+  width: fit-content;
+  
+}
 /* //////////////////////////////// board show ////////////////////////// */
 #myBtn {
   cursor: pointer;
@@ -487,6 +494,11 @@ ul li.checked::before {
   background-color: inherit;
 }
 
+.submitEditTask {
+  width: 5px;
+  height: 5px;
+  cursor: pointer;
+}
 .task .removeTask{
   width: 20px;
   height: 20px;
@@ -497,7 +509,7 @@ ul li.checked::before {
 
 
 /* ///////////// footer board ////////////// */
-.addTask {
+#addTaskBtn {
   border-radius: 5px;
   width: 30px;
   height: 30px;

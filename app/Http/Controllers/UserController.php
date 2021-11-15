@@ -103,7 +103,7 @@ class UserController extends Controller
     {
         $boards = Board::where('user_id' , $user->id)->get();
         Board::deleteAll($boards);
-        
+
         $user->delete();
 
         return redirect()->route('users.index')
