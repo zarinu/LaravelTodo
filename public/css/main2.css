@@ -138,6 +138,7 @@
   border: gray 1px solid;
   width: 100px;
   height: 45px;
+  box-shadow: 1px 1px 10px #bdbdbd
 }
 #addbord{
   float: right;
@@ -149,7 +150,7 @@
 #madalAcouContent {
   border-radius: 10px;
   padding: 10px 0px;
-  box-shadow: 1px 1px 10px #bdbdbd;
+  box-shadow: 1px 1px 10px #9c9c9c;
   border-color: transparent;
   margin: 80px 30px;
   width: 15%;
@@ -235,7 +236,7 @@
   float: right;
   margin-top: 5px;
 }
-.boardOptionBtn {
+#boardOptionBtn {
   width: 13px;
   padding: 3px;
   cursor: pointer;
@@ -449,7 +450,7 @@ ul li.checked::before {
 
 .task{
   display: grid;
-  grid-template-columns: 20px 240px 20px;
+  grid-template-columns: 20px 234px 20px;
   grid-gap: 10px;
   height: 50px;
   padding: 5px 15px 5px 15px;
@@ -490,7 +491,7 @@ ul li.checked::before {
 .task .taskText input{
   margin-top: 6px;
   border: none;
-  width: 240px;
+  width: 234px;
   background-color: inherit;
 }
 
@@ -498,6 +499,7 @@ ul li.checked::before {
   width: 5px;
   height: 5px;
   cursor: pointer;
+  font-size: 10Fpx;
 }
 .task .removeTask{
   width: 20px;

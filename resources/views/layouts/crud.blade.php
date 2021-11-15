@@ -32,9 +32,9 @@ use Illuminate\Support\Facades\Auth; ?>
             <span class="osicon fas fa-search fa-lg" id="searchok"></span>
         </div>
         <div id="rightH">
-            <div id="logo">
+            <a id="logo" href="{{route('dashboard')}}">
                 <img id="logoimg" src="{{asset('img/logo/logoLight.png')}}" alt="logo picture" title="logo picture">
-            </div>
+            </a>
             <a href="{{ route('create-board') }}">
                 <div class="faicon" id="addbord" onclick="addboard()">
                     <span title="add a board" class="fas fa-plus fa-lg" style="font-size: 20px; line-height: 43px;"></span>

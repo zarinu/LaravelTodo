@@ -9,24 +9,30 @@
 
 
   <div class="boardContent">
+
     @foreach($tasks as $task)
     <div class="task">
-      <form class="checkbox">
-        <input type="checkbox" id="done{{$task->id}}" onclick="toChangeTick('{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}} />
+      <form class="checkbox" id="checkTask{{$task->id}}" method="POST" action="{{ route('doneTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
+        @csrf
+        @method('PATCH')
+        <input type="checkbox" name="done" onclick="submitF('checkTask','{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}} />
       </form>
 
-      <form id="edit{{$task->id}}" class="taskText" method="POST" action="{{ route('showEditTask', ['tId' => $task->id]) }}">
+      <form id="renameTask{{$task->id}}" class="taskText" method="POST" action="{{ route('renameTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
         @csrf
         @method('PUT')
         <input type="text" name="task" placeholder="{{$task->text}}">
-        <p class="submitEditTask" onclick="submitF('{{$task->id}}')">.</p>
+        <p class="submitEditTask" onclick="submitF('renameTask','{{$task->id}}')">&#xf06e</p>
       </form>
 
-      <form class="removeTask">
-        <i class="fas fa-trash-alt"></i>
+      <form class="removeTask" id="deleteTask{{$task->id}}" method="POST" action="{{ route('deleteTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
+        @csrf
+        @method('DELETE')
+        <i class="fas fa-trash-alt" onclick="submitF('deleteTask','{{$task->id}}')"></i>
       </form>
     </div>
     @endforeach
+
     <div class="boardFooter">
       <div class="whoAdded">
         <p>Added by {{$board->user_id == auth()->user()->id ? 'You' : $board->user->name}}</p>
@@ -58,7 +64,6 @@
 
     <form method="POST" action="{{ route('addTask', ['bid'=>$board->id]) }}">
       @csrf
-      {{ csrf_field() }}
       <input name="task" type="text">
       <input type="submit">
     </form>
@@ -93,30 +98,31 @@
   }
 
   /////submit for edit name task///////////////
-  function submitF(formId) {
-    document.getElementById('edit' + formId).submit();
+  function submitF(preFix, formId) {
+    // alert(preFix + formId);
+    document.getElementById(preFix + formId).submit();
   }
 
 
   /////////this ids fr checkbox tick ///////////////
-  function toChangeTick(id) {
-    var status = 'todo';
-    if ($("#done" + id).prop('checked') == true) {
-      status = 'done';
-    }
-    
-    $.ajax({
-      type: "PUT",
-      url: 'http://localhost:8000/boards/'+id,
-      data: {
-        _token: "S7rPENJLTmslyUguigApMguIcCqO3UgiqsMesBmc",
-        status: status
-      }, // serializes the form's elements.
-      success: function(data) {
-        
-      }
-    });
+  // function toChangeTick(id) {
+  //   var status = 'todo';
+  //   if ($("#done" + id).prop('checked') == true) {
+  //     status = 'done';
+  //   }
 
-  }
+  //   $.ajax({
+  //     type: "PUT",
+  //     url: 'http://localhost:8000/boards/' + id,
+  //     data: {
+  //       _token: "S7rPENJLTmslyUguigApMguIcCqO3UgiqsMesBmc",
+  //       status: status
+  //     }, // serializes the form's elements.
+  //     success: function(data) {
+
+  //     }
+  //   });
+
+  // }
 </script>
 @endsection

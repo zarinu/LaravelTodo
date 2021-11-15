@@ -18,28 +18,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', function () {
     echo 'There is a test here!';
 });
-
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
+Route::resources([
+    'users' => UserController::class,
+]);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/boards/{id}/edit', [BoardsController::class, 'edit'])->middleware(['auth'])->name('edit-board');
-Route::post('/todos/{id}/update', [BoardsController::class, 'update'])->middleware(['auth'])->name('update');
+Route::post('/boards/{id}/update', [BoardsController::class, 'update'])->middleware(['auth'])->name('update');
 Route::get('/boards/create', [BoardsController::class, 'create'])->middleware(['auth'])->name('create-board');
 Route::post('/boards/add', [BoardsController::class, 'store'])->middleware(['auth'])->name('add');
 Route::get('/boards/{id}', [BoardsController::class, 'show'])->middleware(['auth'])->name('show');
-Route::post('/boards/{id}', [BoardsController::class, 'showAddTask'])->middleware(['auth'])->name('showAddTask');
-Route::put('/boards/{tId}', [BoardsController::class, 'showEditTask'])->middleware(['auth'])->name('showEditTask');
 Route::get('/boards/{id}/delete', [BoardsController::class, 'delete'])->middleware(['auth'])->name('delete');
 Route::get('/todo', [BoardsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 
-Route::resources([
-    'users' => UserController::class,
-]);
-
-Route::post('/tasks/add/{bid}', [TaskController::class, 'store'])->middleware(['auth'])->name('addTask');
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/tasks/{bid}', [TaskController::class, 'store'])->middleware(['auth'])->name('addTask');
+Route::put('/tasks/{bid}/{tid}', [TaskController::class, 'update'])->middleware(['auth'])->name('renameTask');
+Route::patch('/tasks/{bid}/{tid}', [TaskController::class, 'edit'])->middleware(['auth'])->name('doneTask');
+Route::delete('/tasks/{bid}/{tid}', [TaskController::class, 'destroy'])->middleware(['auth'])->name('deleteTask');

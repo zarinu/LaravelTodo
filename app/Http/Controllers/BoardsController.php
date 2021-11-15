@@ -20,33 +20,6 @@ class boardsController extends Controller
         return view('boards.index')->with(['boards' => $boards, 'tasks' => $tasks]);
     }
 
-    public function showEditTask(Request $request, $tid)
-    {
-        # code...
-        dd("ol");
-        $task = Task::find($tid);
-        $task->text = $request->task;
-
-        if ($task->save()) {
-            return redirect('/boards/'.$tid);
-        }
-
-        return; // 422
-    }
-
-    public function showAddTask(Request $request, $id)
-    {
-        # code...
-        $task = new Task;
-        $task->text = $request->task;
-        $task->board_id = $id;
-
-        if ($task->save()) {
-            return redirect('/boards/'.$id);
-        }
-
-        return; // 422
-    }
     public function show(Request $request, $id)
     {
         # code...
