@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class Board extends Model
 {
@@ -14,9 +15,25 @@ class Board extends Model
         'collab_id' => 'array'
     ];
 
+    public static function create($subject, $userId)
+    {
+        $board = new Board;
+        $board->subject = $subject;
+        $board->user_id = $userId;
+        return $board;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public static function getUserBoards()
+    {
+        $collabBoards = Board::whereJsonContains('collab_id', Auth::user()->id)->get();
+        $boards = Board::where('user_id', Auth::user()->id)->get();
+        $boards = $boards->merge($collabBoards);
+        return $boards;
     }
 
     protected static function getTasksBoards($boards)

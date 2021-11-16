@@ -14,9 +14,7 @@ class boardsController extends Controller
     public function index(Request $request)
     {
         # code...
-        $collabBoards = Board::whereJsonContains('collab_id', Auth::user()->id)->get();
-        $boards = Board::where('user_id', Auth::user()->id)->get();
-        $boards = $boards->merge($collabBoards);
+        $boards = Board::getUserBoards();
         $tasks = Board::getTasksboards($boards);
         return view('boards.index')->with(['boards' => $boards, 'tasks' => $tasks]);
     }
@@ -64,10 +62,8 @@ class boardsController extends Controller
 
     public function store(Request $request)
     {
-        # Validations before updating
-        $board = new Board;
-        $board->subject = $request->subject;
-        $board->user_id = Auth::user()->id;
+        // codes
+        $board = Board::create($request->subject, Auth::user()->id);
         if ($board->save()) {
             return redirect('/boards/' . $board->id);
         }
@@ -78,9 +74,7 @@ class boardsController extends Controller
     public function search(Request $request)
     {
         // get tasks and boards that user can see thems
-        $collabBoards = Board::whereJsonContains('collab_id', Auth::user()->id)->get();
-        $boards = Board::where('user_id', Auth::user()->id)->get();
-        $boards = $boards->merge($collabBoards);
+        $boards = Board::getUserBoards();
         $resaultB = $boards->where('subject', $request->search);
 
         $tasks = Board::getTasksboards($boards);
@@ -120,7 +114,7 @@ class boardsController extends Controller
         }
         $lala = array_search(intval($collabId), $preValue, TRUE);
         if ($lala !== False) {
-            echo "qablan collab shede";
+            echo "qablan collab shode";
             return;
         }
         array_push($preValue,  intval($collabId));
