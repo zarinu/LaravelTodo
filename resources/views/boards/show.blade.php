@@ -15,7 +15,7 @@
       <form class="checkbox" id="checkTask{{$task->id}}" method="POST" action="{{ route('doneTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
         @csrf
         @method('PATCH')
-        <input type="checkbox" name="done" onclick="submitF('checkTask','{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}}/>
+        <input type="checkbox" name="done" onclick="submitF('checkTask','{{$task->id}}')" {{$task->done == 1 ? 'checked' : ''}} />
       </form>
 
       <form id="renameTask{{$task->id}}" class="taskText" method="POST" action="{{ route('renameTask', ['bid' => $board->id, 'tid' => $task->id]) }}">
@@ -97,26 +97,5 @@
       boardOptionModal.style.display = "none";
     }
   }
-
-  /////////this ids fr checkbox tick ///////////////
-  // function toChangeTick(id) {
-  //   var status = 'todo';
-  //   if ($("#done" + id).prop('checked') == true) {
-  //     status = 'done';
-  //   }
-
-  //   $.ajax({
-  //     type: "PUT",
-  //     url: 'http://localhost:8000/boards/' + id,
-  //     data: {
-  //       _token: "S7rPENJLTmslyUguigApMguIcCqO3UgiqsMesBmc",
-  //       status: status
-  //     }, // serializes the form's elements.
-  //     success: function(data) {
-
-  //     }
-  //   });
-
-  // }
 </script>
 @endsection

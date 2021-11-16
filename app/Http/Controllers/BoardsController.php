@@ -41,6 +41,9 @@ class boardsController extends Controller
     public function update(Request $request, $id)
     {
         # Validations before updating
+        if($request->subject == null) {
+            return redirect('/boards/' . $id);
+        }
         $board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
 
         if ($board) {
@@ -63,6 +66,9 @@ class boardsController extends Controller
     public function store(Request $request)
     {
         // codes
+        if($request->subject == null) {
+            return redirect('/todo/');
+        }
         $board = Board::create($request->subject, Auth::user()->id);
         if ($board->save()) {
             return redirect('/boards/' . $board->id);

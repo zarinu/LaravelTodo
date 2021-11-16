@@ -17,6 +17,9 @@ class TaskController extends Controller
      */
     public function store(Request $request, $bid)
     {
+        if($request->task == null) {
+            return redirect('/boards/' . $bid);
+        }
         $board = Board::find($bid);
         if ($board->user_id != Auth::user()->id) {
             echo "access denied";
@@ -73,6 +76,10 @@ class TaskController extends Controller
     public function update(Request $request, $bid, $tid)
     {
         # code...
+        // Empty post
+        if($request->task == null) {
+            return redirect('/boards/' . $bid);
+        }
         $board = Board::find($bid);
         if ($board->user_id != Auth::user()->id) {
             echo "access denied";
