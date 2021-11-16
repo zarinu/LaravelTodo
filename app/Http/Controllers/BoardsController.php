@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class boardsController extends Controller
 {
     //
-
     public function index(Request $request)
     {
         # code...
@@ -23,6 +22,10 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
+        if (empty($board)) {
+            echo "this board doesn't exsist";
+            return; // 404
+        }
         $tasks = Task::where('board_id', $id)->get();
         return view('boards.show')->with(['board' => $board, 'tasks' => $tasks]);
     }
@@ -31,6 +34,10 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
+        if (empty($board)) {
+            echo "this board doesn't exsist";
+            return; // 404
+        }
         if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
@@ -41,7 +48,7 @@ class boardsController extends Controller
     public function update(Request $request, $id)
     {
         # Validations before updating
-        if($request->subject == null) {
+        if ($request->subject == null) {
             return redirect('/boards/' . $id);
         }
         $board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
@@ -66,7 +73,7 @@ class boardsController extends Controller
     public function store(Request $request)
     {
         // codes
-        if($request->subject == null) {
+        if ($request->subject == null) {
             return redirect('/todo/');
         }
         $board = Board::create($request->subject, Auth::user()->id);
@@ -86,7 +93,7 @@ class boardsController extends Controller
         $tasks = Board::getTasksboards($boards);
         $resaultT = $tasks[0]->where('text', $request->search);
 
-        if($resaultB->toArray() == null && $resaultT->toArray() == null) {
+        if ($resaultB->toArray() == null && $resaultT->toArray() == null) {
             echo "niste";
             return; // 404
         }
@@ -96,6 +103,10 @@ class boardsController extends Controller
     public function collabGet($id)
     {
         $board = Board::find($id);
+        if (empty($board)) {
+            echo "this board doesn't exist";
+            return; // 404
+        }
         if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
@@ -136,6 +147,10 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
+        if (empty($board)) {
+            echo "this board doesn't exsist";
+            return; // 404
+        }
         if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
