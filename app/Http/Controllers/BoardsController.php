@@ -33,7 +33,7 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
-        if($board->user_id != Auth::user()->id) {
+        if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
         }
@@ -75,10 +75,28 @@ class boardsController extends Controller
         return; // 422
     }
 
+    public function search(Request $request)
+    {
+        // get tasks and boards that user can see thems
+        $collabBoards = Board::whereJsonContains('collab_id', Auth::user()->id)->get();
+        $boards = Board::where('user_id', Auth::user()->id)->get();
+        $boards = $boards->merge($collabBoards);
+        $resaultB = $boards->where('subject', $request->search);
+
+        $tasks = Board::getTasksboards($boards);
+        $resaultT = $tasks[0]->where('text', $request->search);
+
+        if($resaultB->toArray() == null && $resaultT->toArray() == null) {
+            echo "niste";
+            return; // 404
+        }
+        return view('boards.search', ['boards' => $resaultB, 'tasks' => $resaultT]);
+    }
+
     public function collabGet($id)
     {
         $board = Board::find($id);
-        if($board->user_id != Auth::user()->id) {
+        if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
         }
@@ -118,7 +136,7 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
-        if($board->user_id != Auth::user()->id) {
+        if ($board->user_id != Auth::user()->id) {
             echo "access denied";
             return; // 403
         }

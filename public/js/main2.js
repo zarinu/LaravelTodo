@@ -1,3 +1,8 @@
+/////submit for edit name task///////////////
+function submitF(preFix, formId) {
+  // alert(preFix + formId);
+  document.getElementById(preFix + formId).submit();
+}
 // function toChangeTick(id) {
 //   // alert("lala");
 //   var status = 'todo';

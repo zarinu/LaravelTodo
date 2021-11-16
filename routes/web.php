@@ -38,6 +38,7 @@ Route::get('/boards/{id}/delete', [BoardsController::class, 'delete'])->middlewa
 Route::get('/boards/{id}/collab', [BoardsController::class, 'collabGet'])->middleware(['auth'])->name('collab-board');
 Route::post('/boards/{id}/collab', [BoardsController::class, 'collab'])->middleware(['auth'])->name('collab');
 Route::get('/todo', [BoardsController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/todo/search', [BoardsController::class, 'search'])->middleware(['auth'])->name('search');
 
 
 Route::post('/tasks/{bid}', [TaskController::class, 'store'])->middleware(['auth'])->name('addTask');

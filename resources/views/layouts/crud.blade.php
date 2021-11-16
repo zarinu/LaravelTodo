@@ -26,11 +26,11 @@ use Illuminate\Support\Facades\Auth; ?>
                 <span id="sun" title="changing theme">&#xf185</span>
             </div>
         </div>
-        <div id="searchbox">
+        <form id="searchbox" method="GET" action="{{ route('search') }}">
             <span class="osicon fas fa-times fa-lg" id="searchclose"></span>
             <input name="search" type="text" id="search" placeholder="Search Board subject or Task text">
-            <span class="osicon fas fa-search fa-lg" id="searchok"></span>
-        </div>
+            <span class="osicon fas fa-search fa-lg" id="searchok" onclick="submitF('', 'searchbox')"></span>
+        </form>
         <div id="rightH">
             <a id="logo" href="{{route('dashboard')}}">
                 <img id="logoimg" src="{{asset('img/logo/logoLight.png')}}" alt="logo picture" title="logo picture">

@@ -98,13 +98,6 @@
     }
   }
 
-  /////submit for edit name task///////////////
-  function submitF(preFix, formId) {
-    // alert(preFix + formId);
-    document.getElementById(preFix + formId).submit();
-  }
-
-
   /////////this ids fr checkbox tick ///////////////
   // function toChangeTick(id) {
   //   var status = 'todo';
