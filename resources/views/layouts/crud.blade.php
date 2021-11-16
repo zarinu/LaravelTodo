@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\Auth; ?>
 
         <!-- Modal content -->
         <div class="modal-content" id="madalAcouContent">
-            <p style="pointer-events: none;">welcome <strong>{{ Auth::user()->username }}</strong></p>
+            <p style="pointer-events: none;">welcome <strong>{{ Auth::user()->name }}</strong></p>
             <hr class="hr">
 
 

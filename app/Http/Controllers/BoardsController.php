@@ -33,6 +33,10 @@ class boardsController extends Controller
     {
         # code...
         $board = Board::find($id);
+        if($board->user_id != Auth::user()->id) {
+            echo "access denied";
+            return; // 403
+        }
         return view('boards.edit', ['board' => $board]);
     }
 
@@ -73,6 +77,11 @@ class boardsController extends Controller
 
     public function collabGet($id)
     {
+        $board = Board::find($id);
+        if($board->user_id != Auth::user()->id) {
+            echo "access denied";
+            return; // 403
+        }
         return view('boards.collab', ['boardId' => $id]);
     }
 
@@ -108,7 +117,11 @@ class boardsController extends Controller
     public function delete(Request $request, $id)
     {
         # code...
-        $board = Board::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        $board = Board::find($id);
+        if($board->user_id != Auth::user()->id) {
+            echo "access denied";
+            return; // 403
+        }
         if ($board) {
             $board->deleteWithTasks();
             return redirect('/todo');
