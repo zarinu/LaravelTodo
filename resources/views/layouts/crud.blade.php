@@ -66,6 +66,9 @@ use Illuminate\Support\Facades\Auth; ?>
             <p id="logOut" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"><span>&#xf08b </span>
                 <a href="{{ route('logout') }}">Logout</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
             </p>
 
         </div>

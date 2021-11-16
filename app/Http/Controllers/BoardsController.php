@@ -14,8 +14,9 @@ class boardsController extends Controller
     public function index(Request $request)
     {
         # code...
-
+        $collabBoards = Board::whereJsonContains('collab_id', Auth::user()->id)->get();
         $boards = Board::where('user_id', Auth::user()->id)->get();
+        $boards = $boards->merge($collabBoards);
         $tasks = Board::getTasksboards($boards);
         return view('boards.index')->with(['boards' => $boards, 'tasks' => $tasks]);
     }
